@@ -298,7 +298,7 @@ static void CommonHandleCmpTrace(uint64_t arg1, uint64_t arg2, int arg_length,
   const int matching_bytes = CountMatchingBytes(arg_length, arg1, arg2);
   for (int i = 1; i <= matching_bytes; i++) {
     globals::traces->TrySaveTrace(reinterpret_cast<size_t>(pc),
-                                  /*trace_arg1=*/i, /*trace_arg2=*/switch_case);
+                                  /*trace_arg1=*/arg_length - i, /*trace_arg2=*/switch_case);
   }
 }
 
@@ -314,7 +314,7 @@ static void CommonHandleMemcmpTrace(const char *s1, const char *s2, int length,
   for (int i = 1; i <= matching_bytes; i++) {
     globals::traces->TrySaveTrace(reinterpret_cast<size_t>(pc),
                                   /*trace_arg1=*/kMemcmpTraceArg1,
-                                  /*trace_arg2=*/i);
+                                  /*trace_arg2=*/length - i);
   }
 }
 
